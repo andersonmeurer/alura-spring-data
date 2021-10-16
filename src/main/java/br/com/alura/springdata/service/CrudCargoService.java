@@ -20,7 +20,7 @@ public class CrudCargoService {
 
 		boolean continuar = true;
 		do {
-			System.out.println("Qual opcao voce deseja executar");
+			System.out.println("Cargo -> Qual opcao voce deseja executar");
 			System.out.println("0 - Exit");
 			System.out.println("1 - Save");
 			System.out.println("2 - Update");
@@ -30,15 +30,13 @@ public class CrudCargoService {
 			int action = scanner.nextInt();
 
 			switch (action) {
-				case 1: salve(scanner);		break;
+				case 1: insert(scanner);		break;
 				case 2: update(scanner);	break;
 				case 3: showAll();			break;
 				case 4: delete(scanner);	break;
 				default: continuar = false;	break; 
 			}
-
 		} while (continuar);
-
 	}
 
 	private void delete(Scanner scanner) {
@@ -49,12 +47,10 @@ public class CrudCargoService {
 		System.out.println(cargo.getDescricao() + " Deletado!");
 	}
 
-	private void salve(Scanner scanner) {
-		System.out.println("Descricao do cargo");
-		String descricao = scanner.next();
-
+	private void insert(Scanner scanner) {
 		Cargo cargo = new Cargo();
-		cargo.setDescricao(descricao);
+		System.out.println("Descricao do cargo:");
+		cargo.setDescricao(scanner.next());
 		repository.save(cargo);
 		System.out.println(cargo.getDescricao() + " Salvo!");
 	}
