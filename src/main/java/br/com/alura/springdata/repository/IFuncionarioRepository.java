@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import br.com.alura.springdata.orm.Funcionario;
 
 @Repository
-public interface IFuncionarioRepository extends CrudRepository<Funcionario, Integer> {
+public interface IFuncionarioRepository extends PagingAndSortingRepository<Funcionario, Integer> {
 
 	List<Funcionario> findByNome(String nome);
 
@@ -24,7 +25,5 @@ public interface IFuncionarioRepository extends CrudRepository<Funcionario, Inte
 
 	@Query(value = "SELECT * FROM funcionarios f WHERE f.dt_contratacao >= :dataContratacao", nativeQuery = true)
 	List<Funcionario> findDataContratacaoMaior(LocalDate dataContratacao);
-	
-	//	@Query(value = "SELECT * FROM funcionarios WHERE nome = 1?", nativeQuery = true)
-//	List<Funcionario> name(String nome);
+
 }

@@ -21,6 +21,7 @@ public class RelatorioService {
 	private final IFuncionarioRepository repository;
 
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 	public RelatorioService(IFuncionarioRepository repository) {
 		this.repository = repository;
 	}
