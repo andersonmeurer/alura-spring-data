@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.alura.springdata.orm.Cargo;
 import br.com.alura.springdata.orm.Funcionario;
+import br.com.alura.springdata.orm.FuncionarioProjecao;
 import br.com.alura.springdata.repository.ICargoRepository;
 import br.com.alura.springdata.repository.IFuncionarioRepository;
 
@@ -35,6 +36,7 @@ public class RelatorioService {
 			System.out.println("1 - Busca funcionario nome");
 			System.out.println("2 - Busca funcionario nome, data contratacao e salario maior");
 			System.out.println("3 - Busca funcionario data contratacao");
+			System.out.println("4 - Busca funcionario salario");
 
 			int action = scanner.nextInt();
 
@@ -42,6 +44,7 @@ public class RelatorioService {
 				case 1: buscaFuncionarioNome(scanner);					break;
 				case 2: findNomeSalarioMaiorDataContratacao(scanner);	break;
 				case 3: findDataContratacaoMaior(scanner);				break;
+				case 4: funcionarioSalario(scanner);					break;
 				default: continuar = false;								break;
 			}
 		} while (continuar);
@@ -77,5 +80,13 @@ public class RelatorioService {
 		LocalDate localDate = LocalDate.parse(data, formatter);
 		List<Funcionario> list = repository.findDataContratacaoMaior(localDate);
 		list.forEach(System.out::println);
+	}
+
+	private void funcionarioSalario(Scanner scanner) {
+		List<FuncionarioProjecao> list = repository.findFuncionarioSalario();
+		list.forEach(f -> System.out.println("Funcionario: "
+				+ "id: " + f.getId()
+				+ " | Nome: " + f.getNome()
+				+ " | Salario: " + f.getSalario()));
 	}
 }
