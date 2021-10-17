@@ -1,5 +1,6 @@
 package br.com.alura.springdata.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +14,12 @@ public interface IFuncionarioRepository extends CrudRepository<Funcionario, Inte
 
 	List<Funcionario> findByNome(String nome);
 	
-	List<Funcionario> findByNomeIgnoreCaseIsLike(String nome);
+	@Query("SELECT f "
+			+ "FROM Funcionario f "
+			+ "WHERE f.nome = :nome "
+			+ "AND f.salario >= :salario "
+			+ "AND f.dtContratacao = :dataContratacao")
+	List<Funcionario> findNomeSalarioMaiorDataContratacao(String nome, Double salario, LocalDate dataContratacao);
 	
 //	@Query(value = "SELECT * FROM funcionarios WHERE nome = 1?", nativeQuery = true)
 //	List<Funcionario> name(String nome);
