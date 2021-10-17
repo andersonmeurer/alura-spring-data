@@ -70,7 +70,7 @@ public class CrudFuncionarioService {
 		System.out.println("Qual pagina voce deseja visualizar?");
 		Integer nrPagina = scanner.nextInt();
 
-		Pageable pageable = PageRequest.of(nrPagina, 5, Sort.unsorted());
+		Pageable pageable = PageRequest.of(nrPagina, 5, Sort.Direction.ASC, "nome");// nome que foi definido na entidade
 		Page<Funcionario> list = fRepository.findAll(pageable);
 
 		System.out.println(list);
